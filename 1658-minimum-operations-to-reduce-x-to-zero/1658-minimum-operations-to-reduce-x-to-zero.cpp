@@ -3,44 +3,29 @@ class Solution {
 public:
 
     int minOperations(vector<int>& v, int x) {
-          int n=v.size();
-          int mn=1e9;
-          
-          vector<int>prefix(n+1);
-          vector<int>suffix(n+1);
         
-          for(int i=0;i<n;i++){
-              prefix[i+1]=v[i]+prefix[i];
-          }
-          for(int i=n-1;i>=0;i--){
-             
-              if(i==n-1){
-                  suffix[i]=v[i];
-              }else{
-                  suffix[i]=v[i]+suffix[i+1];
-              }
-              
-          }
-          for(int i=n;i>=0;i--){
-               int j=lower_bound(prefix.begin(),prefix.end(),x-suffix[i])-prefix.begin();
-               if(x==suffix[i]){
-                   mn=min(mn,n-i);
-               }
-              if(x==prefix[i]){
-                  mn=min(mn,i);
-              }
-               if(j<=n && (prefix[j]==x-suffix[i])){
-                 
-                   if(j<i){
-                         cout<<i<<" "<<j<<"\n";
-                       mn=min(mn,(n-i+j));
-                   }else{
-                       break;
-                   }
-               }
-              if(j>n)
-                  break;
-              }
-        return (mn==1e9?-1:mn);
+        int sum=0;
+        int n=v.size();
+        for(int i=0;i<n;i++){
+            sum+=v[i];
+        }
+        sum-=x;
+        if(sum==0){
+            return n;
+        }
+        int len=0;
+        for(int i=0,j=0,sum1=0;j<n && i<n;j++){
+             sum1+=v[j];
+             while(i<n && sum1>sum){
+                 sum1-=v[i++];
+             }
+             if(sum1==sum){
+                 len=max(len,j-i+1);
+             }
+        }
+        if(!len){
+            return -1;
+        }
+        return n-len;
     }
 };

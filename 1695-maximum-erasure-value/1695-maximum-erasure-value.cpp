@@ -5,7 +5,7 @@ public:
         int last=-1;
         int n=v.size();
         
-        unordered_map<int,int>ump;
+        map<int,int>ump;
         int sum=0;
         vector<int>prefix(n+1);
         

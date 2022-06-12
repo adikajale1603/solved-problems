@@ -1,22 +1,24 @@
 class Solution {
 public:
-    int maximumUniqueSubarray(vector<int>& nums) {
-        unordered_map<int, int> seen;
-        int l = 0, sum = 0, ans = 0;
-        for (int r = 0; r < nums.size(); r++) {
-            int x = nums[r];
-            if (seen.find(x) != seen.end()) {
-                int index = seen[x];
-                while (l <= index) {  // Move the left side until index + 1
-                    seen.erase(nums[l]);
-                    sum -= nums[l];
-                    l += 1;
-                }
-            }
-            seen[x] = r;
-            sum += x;
-            ans = max(ans, sum);
+    int maximumUniqueSubarray(vector<int>& v) {
+          
+        int last=-1;
+        int n=v.size();
+        
+        unordered_map<int,int>ump;
+        int sum=0;
+        vector<int>prefix(n+1);
+        
+        for(int i=0;i<n;i++){
+            prefix[i+1]=v[i]+prefix[i];
         }
-        return ans;
+        for(int i=0;i<n;i++){
+            if(ump.count(v[i])){
+               last=max(last,ump[v[i]]);
+            }
+            ump[v[i]]=i;
+            sum=max(sum,prefix[i+1]-prefix[last+1]);
+        }
+        return sum;
     }
 };

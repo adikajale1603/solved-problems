@@ -10,7 +10,7 @@ public:
         sort(s.begin(),s.end(),cmp);
         int ans=0;
         
-        map<string,int>dp;
+        unordered_map<string,int>dp;
        
         for(int i=0;i<n;i++){
             

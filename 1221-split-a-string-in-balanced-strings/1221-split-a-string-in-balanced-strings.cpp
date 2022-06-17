@@ -13,10 +13,6 @@ public:
                 ans++;
             }
         }
-        if(cnt==0){
-            return ans;
-        }else{
-            return 0;
-        }
+        return ans;
     }
 };

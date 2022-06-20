@@ -5,7 +5,7 @@ public:
         
         sort(words.begin(), words.end(), [](const string &l, const string &r) { return l.size() > r.size(); });
         
-        map<string,int>mp;
+        unordered_map<string,int>mp;
         
         int n=words.size();
         int ans=0;

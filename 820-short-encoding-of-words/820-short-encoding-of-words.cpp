@@ -1,27 +1,12 @@
 class Solution {
 public:
-    int minimumLengthEncoding(vector<string>& words) {
-           
-        
-        sort(words.begin(), words.end(), [](const string &l, const string &r) { return l.size() > r.size(); });
-        
-        unordered_map<string,int>mp;
-        
-        int n=words.size();
-        int ans=0;
-        for(int i=0;i<n;i++){
-            if(!mp.count(words[i])){
-                ans+=(words[i].size()+1);
-                for(int j=0;j<words[i].size();j++){
-                    string temp="";
-                    for(int k=j;k<words[i].size();k++){
-                       temp.push_back(words[i][k]);
-                    }
-                    mp[temp]=1;
-                }
-            }
-        }
-        return ans;
-          
+      int minimumLengthEncoding(vector<string>& words) {
+        unordered_set<string> s(words.begin(), words.end());
+        for (string w : s)
+            for (int i = 1; i < w.size(); ++i)
+                s.erase(w.substr(i));
+        int res = 0;
+        for (string w : s) res += w.size() + 1;
+        return res;
     }
 };

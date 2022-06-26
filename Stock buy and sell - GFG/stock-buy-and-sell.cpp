@@ -35,12 +35,13 @@ void stockBuySell(int price[], int n) {
     {
         
         if(price[i]<price[i+1]){
-            int j=i;
+            int buy_day=i;
             flag=true;
             while(i+1<n && price[i]<price[i+1]){
                 i++;
             }
-           cout<<"("<<j<<" "<<i<<") ";
+            int sell_day=i;
+           cout<<"("<<buy_day<<" "<<sell_day<<") ";
         }
     }
     if(!flag){

@@ -7,17 +7,12 @@ public:
         
           for(auto &x:nums){
               
-               int cur_longest=1;
+             if(s.count(x-1))
+                 continue;
               
-              for(int i=1;s.count(x-i);i++){
-                  s.erase(x-i);
-                  cur_longest++;
-              }
-              for(int i=1;s.count(x+i);i++){
-                  s.erase(x+i);
-                  cur_longest++;
-              }
-             longest=max(longest,cur_longest);
+              int j=1;
+              while(s.count(x+j))j++;
+              longest=max(longest,j);
           }
         return longest;
     }

@@ -35,7 +35,7 @@ public:
         }
          vector<int>v(4,0);
          int sum=0;
-        sort(matchsticks.begin(),matchsticks.end(), [](const int &l, const int &r){return l > r;});
+        // sort(matchsticks.begin(),matchsticks.end(), [](const int &l, const int &r){return l > r;});
          for(auto &x:matchsticks){
              sum+=x;
          }
